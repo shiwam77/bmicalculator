@@ -11,29 +11,7 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-  Color malecardcolour = inactivecardcolour;
-  Color femalecardcolour = inactivecardcolour;
-
-  // ignore: non_constant_identifier_names
-  void Updatecolor(Gender selectedGender) {
-    if (selectedGender == Gender.Male) {
-      if (malecardcolour == inactivecardcolour) {
-        malecardcolour = activecardcolour;
-      } else {
-        malecardcolour = activecardcolour;
-      }
-      femalecardcolour = inactivecardcolour;
-    }
-    if (selectedGender == Gender.Female) {
-      if (femalecardcolour == inactivecardcolour) {
-        femalecardcolour = activecardcolour;
-      } else {
-        femalecardcolour = activecardcolour;
-      }
-      malecardcolour = inactivecardcolour;
-    }
-  }
-
+  Gender selectedGender;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,11 +28,14 @@ class _InputPageState extends State<InputPage> {
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          Updatecolor(Gender.Male);
+                          selectedGender = Gender.Male;
+                          //Updatecolor(Gender.Male);
                         });
                       },
                       child: Resuablecard(
-                        color: malecardcolour,
+                        color: selectedGender == Gender.Male
+                            ? activecardcolour
+                            : inactivecardcolour,
                         cardChild: ChildWidget(
                           lable: 'Male',
                           icons: Icons.flight,
@@ -66,11 +47,13 @@ class _InputPageState extends State<InputPage> {
                     child: GestureDetector(
                       onTap: () {
                         setState(() {
-                          Updatecolor(Gender.Female);
+                          selectedGender = Gender.Female;
                         });
                       },
                       child: Resuablecard(
-                        color: femalecardcolour,
+                        color: selectedGender == Gender.Female
+                            ? activecardcolour
+                            : inactivecardcolour,
                         cardChild: ChildWidget(
                           lable: 'Female',
                           icons: Icons.local_florist,
