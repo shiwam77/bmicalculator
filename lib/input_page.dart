@@ -1,8 +1,12 @@
+import 'package:bmicalculator/results_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 const activecardcolour = Color(0xFF1D1E33);
 const inactivecardcolour = Color(0xFF111328);
+int height = 180;
+int weight = 60;
+int age = 20;
 enum Gender { Male, Female }
 
 class InputPage extends StatefulWidget {
@@ -19,6 +23,7 @@ class _InputPageState extends State<InputPage> {
           title: Text('BMI CALCULATOR'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
@@ -65,28 +70,166 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             Expanded(
-              child:
-                  GestureDetector(child: Resuablecard(color: activecardcolour)),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('HEIGHT',
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Color(0xFF8D8E98),
+                      )),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: [
+                      Text('$height',
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900,
+                          )),
+                      Text(
+                        'cm',
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Color(0xFF8D8E98),
+                        ),
+                      )
+                    ],
+                  ),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      thumbColor: Color(0xFFEB1555),
+                      activeTrackColor: Colors.white,
+                      overlayColor: Color(0x29EB1555),
+                      thumbShape:
+                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape:
+                          RoundSliderOverlayShape(overlayRadius: 30.0),
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120,
+                      max: 220,
+                      inactiveColor: Color(0xFF8D8E98),
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
+                  )
+                ],
+              ),
             ),
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                    child: GestureDetector(
-                        child: Resuablecard(color: activecardcolour)),
-                  ),
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('WEIGHT',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color(0xFF8D8E98),
+                          )),
+                      Text('$weight',
+                          style: TextStyle(
+                            fontSize: 50,
+                            fontWeight: FontWeight.w900,
+                          )),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundedIconButton(
+                            icon: Icons.add,
+                            onPressed: () {
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          RoundedIconButton(
+                            icon: Icons.add,
+                            onPressed: () {
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  )),
                   Expanded(
-                    child: GestureDetector(
-                        child: Resuablecard(color: activecardcolour)),
-                  )
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('AGE',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color(0xFF8D8E98),
+                          )),
+                      Text(
+                        '$age',
+                        style: TextStyle(
+                          fontSize: 50,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          RoundedIconButton(
+                            icon: Icons.add,
+                            onPressed: () {
+                              setState(() {
+                                weight++;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            width: 15.0,
+                          ),
+                          RoundedIconButton(
+                            icon: Icons.add,
+                            onPressed: () {
+                              setState(() {
+                                weight--;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ))
                 ],
               ),
             ),
-            Container(
-              color: Color(0xFFEB1555),
-              margin: EdgeInsets.only(top: 10.0),
-              width: double.infinity,
-              height: 80,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            result_page(height, weight, age, selectedGender)));
+              },
+              child: Container(
+                child: Center(
+                  child: Text(
+                    'CALCULATOR',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
+                  ),
+                ),
+                color: Color(0xFFEB1555),
+                margin: EdgeInsets.only(top: 10.0),
+                width: double.infinity,
+                height: 80,
+              ),
             )
           ],
         ));
@@ -135,6 +278,29 @@ class Resuablecard extends StatelessWidget {
       ),
       margin: EdgeInsets.all(15.0),
       child: cardChild,
+    );
+  }
+}
+
+class RoundedIconButton extends StatelessWidget {
+  final IconData icon;
+  int number;
+  Function onPressed;
+  RoundedIconButton({this.icon, this.number, this.onPressed});
+  @override
+  Widget build(BuildContext context) {
+    return RawMaterialButton(
+      fillColor: Color(0xFF4C4F5E),
+      constraints: BoxConstraints.tightFor(
+        width: 46.0,
+        height: 46.0,
+      ),
+      child: Icon(
+        icon,
+      ),
+      shape: CircleBorder(),
+      elevation: 0.0,
+      onPressed: onPressed,
     );
   }
 }
