@@ -72,143 +72,173 @@ class _InputPageState extends State<InputPage> {
               ),
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text('HEIGHT',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Color(0xFF8D8E98),
-                      )),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.baseline,
-                    textBaseline: TextBaseline.alphabetic,
-                    children: [
-                      Text('$height',
-                          style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.w900,
-                          )),
-                      Text(
-                        'cm',
+              child: Resuablecard(
+                color: inactivecardcolour,
+                cardChild: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('HEIGHT',
                         style: TextStyle(
                           fontSize: 18,
                           color: Color(0xFF8D8E98),
-                        ),
-                      )
-                    ],
-                  ),
-                  SliderTheme(
-                    data: SliderTheme.of(context).copyWith(
-                      thumbColor: Color(0xFFEB1555),
-                      activeTrackColor: Colors.white,
-                      overlayColor: Color(0x29EB1555),
-                      thumbShape:
-                          RoundSliderThumbShape(enabledThumbRadius: 15.0),
-                      overlayShape:
-                          RoundSliderOverlayShape(overlayRadius: 30.0),
+                        )),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text('$height',
+                            style: TextStyle(
+                              fontSize: 50,
+                              fontWeight: FontWeight.w900,
+                            )),
+                        Text(
+                          'cm',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Color(0xFF8D8E98),
+                          ),
+                        )
+                      ],
                     ),
-                    child: Slider(
-                      value: height.toDouble(),
-                      min: 120,
-                      max: 220,
-                      inactiveColor: Color(0xFF8D8E98),
-                      onChanged: (double newValue) {
-                        setState(() {
-                          height = newValue.round();
-                        });
-                      },
-                    ),
-                  )
-                ],
+                    SliderTheme(
+                      data: SliderTheme.of(context).copyWith(
+                        thumbColor: Color(0xFFEB1555),
+                        activeTrackColor: Colors.white,
+                        overlayColor: Color(0x29EB1555),
+                        thumbShape:
+                            RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                        overlayShape:
+                            RoundSliderOverlayShape(overlayRadius: 30.0),
+                      ),
+                      child: Slider(
+                        value: height.toDouble(),
+                        min: 120,
+                        max: 220,
+                        inactiveColor: Color(0xFF8D8E98),
+                        onChanged: (double newValue) {
+                          setState(() {
+                            height = newValue.round();
+                          });
+                        },
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
             Expanded(
               child: Row(
                 children: [
                   Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text('WEIGHT',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF8D8E98),
-                          )),
-                      Text('$weight',
-                          style: TextStyle(
-                            fontSize: 50,
-                            fontWeight: FontWeight.w900,
-                          )),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundedIconButton(
-                            icon: FontAwesomeIcons.minus,
-                            onPressed: () {
-                              setState(() {
-                                weight--;
-                              });
-                            },
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          RoundedIconButton(
-                            icon: FontAwesomeIcons.plus,
-                            onPressed: () {
-                              setState(() {
-                                weight++;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  )),
-                  Expanded(
-                      child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text('AGE',
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Color(0xFF8D8E98),
-                          )),
-                      Text(
-                        '$age',
-                        style: TextStyle(
-                          fontSize: 50,
-                          fontWeight: FontWeight.w900,
+                    child: Resuablecard(
+                      color: inactivecardcolour,
+                      cardChild: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text('WEIGHT',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xFF8D8E98),
+                                  )),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Text('$weight',
+                                  style: TextStyle(
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w900,
+                                  )),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Expanded(
+                                  child: RoundedIconButton(
+                                    icon: FontAwesomeIcons.minus,
+                                    onPressed: () {
+                                      setState(() {
+                                        weight--;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: RoundedIconButton(
+                                    icon: FontAwesomeIcons.plus,
+                                    onPressed: () {
+                                      setState(() {
+                                        weight++;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          RoundedIconButton(
-                            icon: FontAwesomeIcons.minus,
-                            onPressed: () {
-                              setState(() {
-                                age--;
-                              });
-                            },
-                          ),
-                          SizedBox(
-                            width: 15.0,
-                          ),
-                          RoundedIconButton(
-                            icon: FontAwesomeIcons.plus,
-                            onPressed: () {
-                              setState(() {
-                                age++;
-                              });
-                            },
-                          ),
-                        ],
+                    ),
+                  ),
+                  Expanded(
+                    child: Resuablecard(
+                      color: inactivecardcolour,
+                      cardChild: Padding(
+                        padding: EdgeInsets.fromLTRB(0, 20, 0, 20),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              child: Text('AGE',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Color(0xFF8D8E98),
+                                  )),
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                '$age',
+                                style: TextStyle(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.w900,
+                                ),
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: RoundedIconButton(
+                                    icon: FontAwesomeIcons.minus,
+                                    onPressed: () {
+                                      setState(() {
+                                        age--;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                Expanded(
+                                  child: RoundedIconButton(
+                                    icon: FontAwesomeIcons.plus,
+                                    onPressed: () {
+                                      setState(() {
+                                        age++;
+                                      });
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
-                    ],
-                  ))
+                    ),
+                  )
                 ],
               ),
             ),
