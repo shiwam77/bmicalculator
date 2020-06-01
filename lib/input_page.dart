@@ -1,6 +1,8 @@
 import 'package:bmicalculator/results_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'Bmicalculator.dart';
 
 const activecardcolour = Color(0xFF1D1E33);
 const inactivecardcolour = Color(0xFF111328);
@@ -43,7 +45,7 @@ class _InputPageState extends State<InputPage> {
                             : inactivecardcolour,
                         cardChild: ChildWidget(
                           lable: 'Male',
-                          icons: Icons.flight,
+                          icons: FontAwesomeIcons.male,
                         ),
                       ),
                     ),
@@ -61,7 +63,7 @@ class _InputPageState extends State<InputPage> {
                             : inactivecardcolour,
                         cardChild: ChildWidget(
                           lable: 'Female',
-                          icons: Icons.local_florist,
+                          icons: FontAwesomeIcons.female,
                         ),
                       ),
                     ),
@@ -143,10 +145,10 @@ class _InputPageState extends State<InputPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           RoundedIconButton(
-                            icon: Icons.add,
+                            icon: FontAwesomeIcons.minus,
                             onPressed: () {
                               setState(() {
-                                weight++;
+                                weight--;
                               });
                             },
                           ),
@@ -154,10 +156,10 @@ class _InputPageState extends State<InputPage> {
                             width: 15.0,
                           ),
                           RoundedIconButton(
-                            icon: Icons.add,
+                            icon: FontAwesomeIcons.plus,
                             onPressed: () {
                               setState(() {
-                                weight--;
+                                weight++;
                               });
                             },
                           ),
@@ -185,10 +187,10 @@ class _InputPageState extends State<InputPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           RoundedIconButton(
-                            icon: Icons.add,
+                            icon: FontAwesomeIcons.minus,
                             onPressed: () {
                               setState(() {
-                                weight++;
+                                age--;
                               });
                             },
                           ),
@@ -196,10 +198,10 @@ class _InputPageState extends State<InputPage> {
                             width: 15.0,
                           ),
                           RoundedIconButton(
-                            icon: Icons.add,
+                            icon: FontAwesomeIcons.plus,
                             onPressed: () {
                               setState(() {
-                                weight--;
+                                age++;
                               });
                             },
                           ),
@@ -212,11 +214,16 @@ class _InputPageState extends State<InputPage> {
             ),
             GestureDetector(
               onTap: () {
+                Bmicalculator bm =
+                    Bmicalculator(height: height, weight: weight);
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) =>
-                            result_page(height, weight, age, selectedGender)));
+                        builder: (context) => result_page(
+                              bmiresult: bm.calculatebmi(),
+                              resulttext: bm.Getresult(),
+                              interception: bm.Getinterception(),
+                            )));
               },
               child: Container(
                 child: Center(
@@ -292,8 +299,8 @@ class RoundedIconButton extends StatelessWidget {
     return RawMaterialButton(
       fillColor: Color(0xFF4C4F5E),
       constraints: BoxConstraints.tightFor(
-        width: 46.0,
-        height: 46.0,
+        width: 56.0,
+        height: 56.0,
       ),
       child: Icon(
         icon,
